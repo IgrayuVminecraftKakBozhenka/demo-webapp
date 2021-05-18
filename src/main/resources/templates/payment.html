@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Выплата</title>
+    <link th:href="@{/styles/payment.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<h1 th:text="'За ' + ${payment.getDate()}">Начисление</h1>
+<form th:action="@{'/payment/' + ${payment.getId()}}" method="post">
+    <label>Заработная плата: <input th:value="${payment.getSalary()}" name="salary"/></label>
+    <label>Премия: <input th:value="${payment.getPrize()}" name="prize"/></label>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

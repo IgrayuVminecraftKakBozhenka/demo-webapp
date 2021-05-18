@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список сотрудников</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<h1>Сотрудники</h1>
+<h2>Добавить нового сотрудника</h2>
+<form method="post" th:action="@{'/person'}">
+    <label>Фамилия: <input name="name"/></label>
+    <label>Зарплата: <input name="salary"/></label>
+    <button type="submit">Сохранить</button>
+</form>
+<h2>Список сотрудников</h2>
+    <ol class="employees_list">
+        <li th:each="p : ${persons}">
+            <a th:href="'person/' + ${p.id}" th:text="${p.name}"/>
+        </li>
+    </ol>
+</body>
+</html>

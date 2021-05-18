@@ -1,0 +1,34 @@
+  <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудник</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<h1>Сотрудник</h1>
+<form th:action="@{'/person/' + ${person.id}}" method="post">
+    <label>Фамилия: <input th:value="${person.name}" name="name"/></label>
+    <label>Зарплата: <input th:value="${person.salary}" name="salary"/></label>
+    <button type="submit">Сохранить</button>
+</form>
+<h2>Добавить начисление</h2>
+<form method="post" th:action="@{'/person/' + ${person.getId()} + '/payment'}">
+    <label>Зарплата: <input name="salary"/></label>
+    <label>Премия: <input name="prize"/></label>
+    <label>Период: <input name="date"/></label>
+    <button type="submit">Сохранить</button>
+</form>
+<h2>Его начисления:</h2>
+<ol class="employees_list">
+    <li th:each="p : ${payments}">
+        <a th:href="@{'/payment/' + ${p.getId()}}" th:text="'За ' + ${p.getDate()}" >За март 2020</a>
+        <form class="delete_payment" action="#" th:action="@{'/delete/'}", method="get">
+            <button type="submit" th:value="${p.getId()}" th:name="paymentId">
+                &#10006
+            </button>
+        </form>
+    </li>
+</ol>
+</body>
+</html>
